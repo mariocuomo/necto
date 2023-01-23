@@ -8,7 +8,7 @@ The use case of this first prototype is about python scripts and dependencies be
 
 Necto is developed using javascript and D3.js.<br>
 The graph is drawn using force directed approach and uses data in [data.json](https://github.com/mariocuomo/necto/blob/main/necto-tool/data.json) file. <br>
-
+A node is a function and there is a link between x and y if function x is called in function y.
 ``` json
 {
 	"nodes": [
