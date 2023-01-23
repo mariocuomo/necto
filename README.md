@@ -27,5 +27,5 @@ The graph is drawn using force directed approach and uses data in [data.json](ht
 
 to-do list
 - write a script to generate [data.json](https://github.com/mariocuomo/necto/blob/main/necto-tool/data.json) file.<br>
-  it should tak in input a directory of python script.
+  it should take in input a directory of python script and return data.json file.
 - ...
