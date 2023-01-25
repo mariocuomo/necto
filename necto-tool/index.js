@@ -1,6 +1,6 @@
 function drawGraph(graph) {
-  const width = "960";
-  const height = "960";
+  const width = "1200";
+  const height = "1200";
 
   radius = 20;
 
@@ -18,30 +18,39 @@ function drawGraph(graph) {
       )
       .force('collision', d3.forceCollide().radius(function(d) {
               return d.radius}))
-    .force("center", d3.forceCenter(document.querySelector("#graphdrawing").clientWidth / 3, document.querySelector("#graphdrawing").clientHeight/4));
+    //.force("center", d3.forceCenter(document.querySelector("#graphdrawing").clientWidth / 2, document.querySelector("#graphdrawing").clientHeight/2));
+    .force("center", d3.forceCenter(width / 2, width/4));
 
-  svg.append("svg:defs").selectAll("marker-end")
+  console.log(document.querySelector("#graphdrawing").clientWidth)
+   
+  svg.append("svg:defs").selectAll("marker")
     .data(["end"])      // Different link/path types can be defined here
     .enter().append("svg:marker")    // This section adds in the arrows
     .attr("id", String)
     .attr("viewBox", "0 -5 10 10")
     .attr("refX", 15)
-    .attr("refY", 0.5)
-    .attr("markerWidth", 2)
-    .attr("markerHeight", 2)
+    .attr("refY", -0.5)
+    .attr("markerWidth", 8)
+    .attr("markerHeight", 8)
     .attr("orient", "auto")
     .append("svg:path")
-    .attr("d", "M0,-5L10,0L0,5");
-   
+    .attr("d", "M0,-5L10,0L0,5")
+    .attr("fill", "black")
+
+
   var link = svg.append("g")
       .selectAll("line")
       .data(graph.links)
       .enter().append("line")
-      .attr("marked-def","end")
+
 
 
   link
-    .style("stroke", "grey")
+    .style("stroke", "black")
+    .attr("stroke-width", 2)
+    .attr("marker-end", "url(#end)");
+
+
 
 
   var node = svg.append("g")
@@ -57,7 +66,7 @@ function drawGraph(graph) {
 
   node
       .style("fill", "lightblue")
-      .style("fill-opacity","0.9")
+      .style("fill-opacity","1")
       .style("stroke", "black")
 
   var label = svg.append("g")
@@ -92,16 +101,29 @@ function drawGraph(graph) {
   simulation.force("link")
       .links(graph.links);
 
+
+
   function ticked() {
+      var arrowheadLength = 10
+      link.each(function(d) {
+        var x1 = d.source.x,
+            y1 = d.source.y,
+            x2 = d.target.x,
+            y2 = d.target.y,
+            angle = Math.atan2(y2 - y1, x2 - x1);
+            d.targetX = x2 - Math.cos(angle) * (radius - arrowheadLength);
+            d.targetY = y2 - Math.sin(angle) * (radius - arrowheadLength);
+      });
+
+      node
+          .attr("cx", function(d) { return d.x = Math.max(radius, Math.min(width - radius, d.x)); })
+          .attr("cy", function(d) { return d.y = Math.max(radius, Math.min(height - radius, d.y)); });
+
       link
           .attr("x1", function(d) { return d.source.x; })
           .attr("y1", function(d) { return d.source.y; })
-          .attr("x2", function(d) { return d.target.x; })
-          .attr("y2", function(d) { return d.target.y; });
-
-      node
-           .attr("cx", function (d) { return d.x+5; })
-           .attr("cy", function(d) { return d.y-3; });
+          .attr("x2", function(d){return d.targetX; })
+          .attr("y2", function(d){return d.targetY; })
       
       label
           .attr("x", function(d) { return d.x; })
