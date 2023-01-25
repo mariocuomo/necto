@@ -31,5 +31,6 @@ to-do list
 - include class information in json file for each node
 - add border forces to keep the graph inside svg element
 
+---
 
 This tool take inspiration from a project proposed in Information Visualization course - @ Università degli Studi Roma Tre
