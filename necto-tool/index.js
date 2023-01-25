@@ -74,6 +74,8 @@ function drawGraph(graph) {
       .data(graph.nodes)
       .enter().append("text")
       .text(function(d) { return d.name; })
+      .attr("dx", "-8")
+      .attr("dy", "5")
       .attr("class", "label");
 
   label 
