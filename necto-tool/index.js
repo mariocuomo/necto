@@ -20,14 +20,29 @@ function drawGraph(graph) {
               return d.radius}))
     .force("center", d3.forceCenter(document.querySelector("#graphdrawing").clientWidth / 3, document.querySelector("#graphdrawing").clientHeight/4));
 
+  svg.append("svg:defs").selectAll("marker-end")
+    .data(["end"])      // Different link/path types can be defined here
+    .enter().append("svg:marker")    // This section adds in the arrows
+    .attr("id", String)
+    .attr("viewBox", "0 -5 10 10")
+    .attr("refX", 15)
+    .attr("refY", 0.5)
+    .attr("markerWidth", 2)
+    .attr("markerHeight", 2)
+    .attr("orient", "auto")
+    .append("svg:path")
+    .attr("d", "M0,-5L10,0L0,5");
    
   var link = svg.append("g")
       .selectAll("line")
       .data(graph.links)
       .enter().append("line")
+      .attr("marked-def","end")
+
 
   link
-    .style("stroke", "grey");
+    .style("stroke", "grey")
+
 
   var node = svg.append("g")
       .attr("class", "nodes")
