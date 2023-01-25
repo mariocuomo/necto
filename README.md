@@ -26,6 +26,10 @@ Each node is a function and there is a link between node x and node y if functio
 ```
 
 to-do list
-- write a script to generate [data.json](https://github.com/mariocuomo/necto/blob/main/necto-tool/data.json) file.<br>
+- refactor and test script [create_data.py](https://github.com/mariocuomo/necto/blob/main/create_data.py) used to generate [data.json](https://github.com/mariocuomo/necto/blob/main/necto-tool/data.json) file.<br>
   it should take in input a directory of python script and return data.json file.
 - include class information in json file for each node
+- add border forces to keep the graph inside svg element
+
+
+This tool take inspiration from a project proposed in Information Visualization course - @ Università degli Studi Roma Tre
