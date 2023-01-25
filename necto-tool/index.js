@@ -18,8 +18,7 @@ function drawGraph(graph) {
       )
       .force('collision', d3.forceCollide().radius(function(d) {
               return d.radius}))
-    //.force("center", d3.forceCenter(document.querySelector("#graphdrawing").clientWidth / 2, document.querySelector("#graphdrawing").clientHeight/2));
-    .force("center", d3.forceCenter(width / 2, width/4));
+      .force("center", d3.forceCenter(width / 2, width/4));
 
   console.log(document.querySelector("#graphdrawing").clientWidth)
    
