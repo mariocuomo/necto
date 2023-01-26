@@ -1,6 +1,6 @@
 function drawGraph(graph) {
-  const width = "1200";
-  const height = "1200";
+  const width = window.innerWidth;
+  const height = window.innerHeight;
 
   radius = 20;
 
@@ -18,7 +18,7 @@ function drawGraph(graph) {
       )
       .force('collision', d3.forceCollide().radius(function(d) {
               return d.radius}))
-      .force("center", d3.forceCenter(width / 2, width/4));
+      .force("center", d3.forceCenter(width / 2, height/2));
 
   console.log(document.querySelector("#graphdrawing").clientWidth)
    
